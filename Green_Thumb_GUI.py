@@ -6,8 +6,8 @@
 from tkinter import *
 
 #constants
-WIDTH = 1000
-HEIGHT = 1000
+WIDTH = 800
+HEIGHT = 800
 FONTSIZE = 40
 
 class MainGUI(Frame):
@@ -24,16 +24,20 @@ class MainGUI(Frame):
     #Changes screen to display home screen
     def homeScreen(self, parent):
         #top left button
-        self.homeButton1 = Button(parent, text = "Water Over Time Stats", command = self.waterOverTimeScreen)
+        img1 = PhotoImage(file="Graphics/HomeButton1.gif")
+        self.homeButton1 = Button(parent, image=img1, command = self.waterOverTimeScreen)
         self.homeButton1.grid(row=0, column=0, sticky=N+S+E+W)
         #top right button
-        self.homeButton2 = Button(parent, text = "Real-Time Sensor Feedback", command = self.sensorFeedbackScreen)
+        img2 = PhotoImage(file="Graphics/HomeButton2.gif")
+        self.homeButton2 = Button(parent, image=img2, command = self.sensorFeedbackScreen)
         self.homeButton2.grid(row=0, column=1, sticky=N+S+E+W)
         #bottom left button
-        self.homeButton3 = Button(parent, text = "Water Schedule", command = self.waterScheduleScreen)
+        img3 = PhotoImage(file="Graphics/HomeButton3.gif")
+        self.homeButton3 = Button(parent, image=img3, command = self.waterScheduleScreen)
         self.homeButton3.grid(row=1, column=0, sticky=N+S+E+W)
         #bottom right button
-        self.homeButton4 = Button(parent, text = "Settings and Preferences", command = self.settingsScreen)
+        img4 = PhotoImage(file="Graphics/HomeButton4.gif")
+        self.homeButton4 = Button(parent, image=img4, command = self.settingsScreen)
         self.homeButton4.grid(row=1, column=1, sticky=N+S+E+W)
         
     
