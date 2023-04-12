@@ -1,5 +1,5 @@
 #To add:
-##Button pictures
+##Make graphics high quality
 ##Creating Screens 2-5
 ##Saving information to a file so that it can be accessed even when the program closes
 
@@ -23,27 +23,33 @@ class MainGUI(Frame):
     
     #Changes screen to display home screen
     def homeScreen(self, parent):
+        #self.grid_forget()
         #top left button
         img1 = PhotoImage(file="Graphics/HomeButton1.gif")
-        self.homeButton1 = Button(parent, image=img1, command = self.waterOverTimeScreen)
+        self.homeButton1 = Button(parent, image=img1, command = self.waterOverTimeScreen())
         self.homeButton1.grid(row=0, column=0, sticky=N+S+E+W)
+        self.homeButton1.image = img1
         #top right button
         img2 = PhotoImage(file="Graphics/HomeButton2.gif")
-        self.homeButton2 = Button(parent, image=img2, command = self.sensorFeedbackScreen)
+        self.homeButton2 = Button(parent, image=img2, command = self.sensorFeedbackScreen())
         self.homeButton2.grid(row=0, column=1, sticky=N+S+E+W)
+        self.homeButton2.image = img2
         #bottom left button
         img3 = PhotoImage(file="Graphics/HomeButton3.gif")
-        self.homeButton3 = Button(parent, image=img3, command = self.waterScheduleScreen)
+        self.homeButton3 = Button(parent, image=img3, command = self.waterScheduleScreen())
         self.homeButton3.grid(row=1, column=0, sticky=N+S+E+W)
+        self.homeButton3.image = img3
         #bottom right button
         img4 = PhotoImage(file="Graphics/HomeButton4.gif")
-        self.homeButton4 = Button(parent, image=img4, command = self.settingsScreen)
+        self.homeButton4 = Button(parent, image=img4, command = self.settingsScreen())
         self.homeButton4.grid(row=1, column=1, sticky=N+S+E+W)
+        self.homeButton4.image = img4
         
     
     #Changes screen to display water over time graph
     def waterOverTimeScreen(self):
         pass
+        #homeButton1.grid_forget()
     
     #Changes screen to display real-time sensor feedback screen
     def sensorFeedbackScreen(self):
