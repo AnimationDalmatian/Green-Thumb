@@ -60,32 +60,40 @@ class MainGUI(Frame):
     def waterOverTimeScreen(self):
         global widgetList
         self.clearWindow()
-        self.backButton = Button(self.parent, text = "waterOverTime", anchor = N, height = 20, width = 150, command = self.homeScreen)
+        img1 = PhotoImage(file="Graphics/BackButton.gif")
+        self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
         self.backButton.grid()
+        self.backButton.image = img1
         widgetList = [self.backButton]
     
     #Changes screen to display real-time sensor feedback screen
     def sensorFeedbackScreen(self):
         global widgetList
         self.clearWindow()
-        self.backButton = Button(self.parent, text = "sensorFeedback", anchor = N, height = 20, width = 150, command = self.homeScreen)
+        img1 = PhotoImage(file="Graphics/BackButton.gif")
+        self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
         self.backButton.grid()
+        self.backButton.image = img1
         widgetList = [self.backButton]
     
     #Changes screen to display water schedule screen
     def waterScheduleScreen(self):
         global widgetList
         self.clearWindow()
-        self.backButton = Button(self.parent, text = "waterSchedule", anchor = N, height = 20, width = 150, command = self.homeScreen)
+        img1 = PhotoImage(file="Graphics/BackButton.gif")
+        self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
         self.backButton.grid()
+        self.backButton.image = img1
         widgetList = [self.backButton]
     
     #Changes screen to display settings menu
     def settingsScreen(self):
         global widgetList
         self.clearWindow()
-        self.backButton = Button(self.parent, text = "settings", anchor = N, height = 20, width = 150, command = self.homeScreen)
+        img1 = PhotoImage(file="Graphics/BackButton.gif")
+        self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
         self.backButton.grid()
+        self.backButton.image = img1
         widgetList = [self.backButton]
 
 #################################  MAIN  ########################################
