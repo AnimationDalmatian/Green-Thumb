@@ -2,13 +2,16 @@
 ##Make graphics high quality
 ##Creating Screens 2-5
 ##Saving information to a file so that it can be accessed even when the program closes
-
 from tkinter import *
 
 #constants
 WIDTH = 800
 HEIGHT = 800
 FONTSIZE = 40
+
+#initialize widget list which will later be filled with widgets that are
+#on screen, in order for them to be destroyed when a button is pressed
+widgetList = []
 
 class MainGUI(Frame):
     def __init__(self, parent):
@@ -26,12 +29,12 @@ class MainGUI(Frame):
     #configure GUI
     def setupGUI(self):
         self.display = Label(self, text = "", anchor = E, bg = "white", height = HEIGHT, width = WIDTH, font = ("", FONTSIZE))
-        #self.display.grid(row = 0, column = 0, columnspan = 4, sticky = E+W+N+S)
     
     #Changes screen to display home screen
     def homeScreen(self):
         global widgetList
         #top left button
+        self.clearWindow()
         img1 = PhotoImage(file="Graphics/HomeButton1.gif")
         self.homeButton1 = Button(self.parent, image=img1, command = self.waterOverTimeScreen)
         self.homeButton1.grid(row=0, column=0, sticky=N+S+E+W)
@@ -58,7 +61,7 @@ class MainGUI(Frame):
         global widgetList
         self.clearWindow()
         self.backButton = Button(self.parent, text = "waterOverTime", anchor = N, height = 20, width = 150, command = self.homeScreen)
-        self.backButton.pack()
+        self.backButton.grid()
         widgetList = [self.backButton]
     
     #Changes screen to display real-time sensor feedback screen
@@ -66,7 +69,7 @@ class MainGUI(Frame):
         global widgetList
         self.clearWindow()
         self.backButton = Button(self.parent, text = "sensorFeedback", anchor = N, height = 20, width = 150, command = self.homeScreen)
-        self.backButton.pack()
+        self.backButton.grid()
         widgetList = [self.backButton]
     
     #Changes screen to display water schedule screen
@@ -74,7 +77,7 @@ class MainGUI(Frame):
         global widgetList
         self.clearWindow()
         self.backButton = Button(self.parent, text = "waterSchedule", anchor = N, height = 20, width = 150, command = self.homeScreen)
-        self.backButton.pack()
+        self.backButton.grid()
         widgetList = [self.backButton]
     
     #Changes screen to display settings menu
@@ -82,7 +85,7 @@ class MainGUI(Frame):
         global widgetList
         self.clearWindow()
         self.backButton = Button(self.parent, text = "settings", anchor = N, height = 20, width = 150, command = self.homeScreen)
-        self.backButton.pack()
+        self.backButton.grid()
         widgetList = [self.backButton]
 
 #################################  MAIN  ########################################
