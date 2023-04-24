@@ -26,7 +26,10 @@ class MainGUI(Frame):
     def clearWindow(self):
         global widgetList
         for widget in widgetList:
-            widget.destroy()
+            try:
+                widget.destroy()
+            except:
+                pass
     
     #configure GUI
     def setupGUI(self):
