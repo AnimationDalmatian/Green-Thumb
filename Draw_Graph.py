@@ -3,7 +3,7 @@
 #To use matplotlib - pip install matplotlib
 from matplotlib import *
 from tkinter import *
-import Green_Thumb_MoistureSensor as mS
+import Moisture_Sensor as mS
 #TkAgg is made to integrate with Tkinter
 use('TkAgg')
 from matplotlib.figure import Figure
@@ -12,14 +12,12 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationTool
 class App(Tk):
     def __init__(self):
         super().__init__()
-
         self.title('Tkinter Matplotlib Demo')
+        
         #set data
-        data = {
-            'OptionA': 1,
-            'OptionB': 3,
-            'OptionC': 2
-        }
+        data = {}
+        for k, v in mS.moistures.items():
+            data[k] = v
         options = data.keys()
         results = data.values()
 
