@@ -3,6 +3,8 @@
 ##Creating Screens 2-5
 ##Saving information to a file so that it can be accessed even when the program closes
 from tkinter import *
+from matplotlib import *
+from Draw_Graph import *
 
 #constants
 WIDTH = 800
@@ -64,7 +66,9 @@ class MainGUI(Frame):
         self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
         self.backButton.grid()
         self.backButton.image = img1
-        widgetList = [self.backButton]
+        #Create chart from Draw_Graph.py
+        self.app = App()
+        widgetList = [self.backButton, self.app]
     
     #Changes screen to display real-time sensor feedback screen
     def sensorFeedbackScreen(self):

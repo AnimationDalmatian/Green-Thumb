@@ -1,5 +1,6 @@
 #Subfile which will draw graph for top right button's screen. 
 #This will be imported to the main file and used in a widget.
+#To use matplotlib - pip install matplotlib
 from matplotlib import *
 from tkinter import *
 #TkAgg is made to integrate with Tkinter
@@ -32,7 +33,3 @@ class App(Tk):
         axes.set_title("Test")
         axes.set_ylabel("Options")
         figure_canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
-        
-
-app = App()
-app.mainloop()
