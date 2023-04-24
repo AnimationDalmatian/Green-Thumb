@@ -1,28 +1,21 @@
-# Just the skeleton of this program; all it does is detect water from a glass.
-# After reading a little about this sensor, what is written right now is 
-# the simplest for this sensor to just work. 
+# new rough skeleton of moisture sensor code with new sensor
 
-
-import RPi.GPIO as GPIO
 import time
+import board
+from adafruit_seesaw.seesaw import Seesaw
 
-#GPIO setup
-channel = 17
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(channel, GPIO.IN)
 
-def callback(channel):
-    if (GPIO.input(channel)):
-        print("no water detected!")
-    else:
-        print("water detected!")
+# uses board.SCL and board.SDA
+i2c_bus = board.I2C()
 
-# let us knoow when the pin goes HIGH to LOW
-GPIO.add_event_detect(channel, GPIO.BOTH, bouncetime = 300) 
+ss = Seesaw(i2c_bus, addr = 0x36)
 
-# assign function to GPIO pin, run function on change
-GPIO.add_event_callback(channel, callback)
-
-#infinite loop
 while(True):
+    # read moisture level through capacitive tough pad
+    touch = ss.moisture_read()
+    
+    # read temperature from the temperature sensor
+    temp = ss.get_temp()
+    
+    print("Temp: " + str(temp) + "\t Moisture: " + str(touch))
     time.sleep(1)
