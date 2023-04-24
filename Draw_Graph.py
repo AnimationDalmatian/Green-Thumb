@@ -3,6 +3,7 @@
 #To use matplotlib - pip install matplotlib
 from matplotlib import *
 from tkinter import *
+import Green_Thumb_MoistureSensor as mS
 #TkAgg is made to integrate with Tkinter
 use('TkAgg')
 from matplotlib.figure import Figure
@@ -16,8 +17,8 @@ class App(Tk):
         #set data
         data = {
             'OptionA': 1,
-            'OptionB': 2,
-            'OptionC': 3
+            'OptionB': 3,
+            'OptionC': 2
         }
         options = data.keys()
         results = data.values()
@@ -29,7 +30,7 @@ class App(Tk):
 
         #Establish axes for graph
         axes = figure.add_subplot()
-        axes.bar(options, results)
+        axes.plot(options, results)
         axes.set_title("Test")
         axes.set_ylabel("Options")
         figure_canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)

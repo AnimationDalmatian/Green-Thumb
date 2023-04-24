@@ -1,7 +1,3 @@
-#To add:
-##Make graphics high quality
-##Creating Screens 2-5
-##Saving information to a file so that it can be accessed even when the program closes
 from tkinter import *
 from matplotlib import *
 from Draw_Graph import *
@@ -63,7 +59,7 @@ class MainGUI(Frame):
         
     #Changes screen to display water over time graph
     def waterOverTimeScreen(self):
-        global widgetList
+        global widgetList, graph
         self.clearWindow()
         img1 = PhotoImage(file="Graphics/BackButton.gif")
         self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
