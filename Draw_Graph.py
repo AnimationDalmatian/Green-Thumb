@@ -15,9 +15,7 @@ class App(Tk):
         self.title('Tkinter Matplotlib Demo')
         
         #set data
-        data = {}
-        for k, v in mS.moistures.items():
-            data[k] = v
+        data = {x for x in mS.Moistures: y for y in mS.times}
         options = data.keys()
         results = data.values()
 

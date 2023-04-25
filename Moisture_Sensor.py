@@ -12,9 +12,7 @@ GPIO.setmode(GPIO.BCM)
 i2c_bus = board.I2C()
 ss = Seesaw(i2c_bus, addr = 0x36)
 
-'''moistures = {}
-temps = {}'''
-
+# lists to hold measurements from sensor
 moistures = []
 times = []
 
@@ -29,19 +27,13 @@ while(True):
     t = time.localtime()
     currentTime = time.strftime("%H:%M:%S", t)
     
-    # add data to dictionary
-    '''moistures[currentTime] = touch
-    temps[currentTime] = temp'''
-    
+    # add data to lists   
     moistures.append(touch)
     times.append(currentTime)
-    
-    
-    
+   
     print(f"Temp: {temp} \t Moisture: {touch}")
     print(f"Moisture list: {moistures}")
     print(f"Time list: {times}")
-    #print(f"Temp dict: {temps}")
     time.sleep(3)
     
   
