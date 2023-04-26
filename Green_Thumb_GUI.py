@@ -1,6 +1,6 @@
 from tkinter import *
 from matplotlib import *
-from Draw_Graph import *         #temporarily commented out to work on chart
+from Draw_Graph import *
 
 #constants
 WIDTH = 800
@@ -77,7 +77,20 @@ class MainGUI(Frame):
         self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
         self.backButton.grid()
         self.backButton.image = img1
-        widgetList = [self.backButton]
+        
+        #Set up table                                   #use same data from graph for table
+        optionsText = ""
+        resultsText = ""
+        for i in data:
+            optionsText += (str(i) + "\n")
+            resultsText += (str(data[i]) + "\n")
+        
+        self.optionsList = Label(text = optionsText, font = FONTSIZE)    #add borders
+        self.resultsList = Label(text = resultsText, font = FONTSIZE)    #add borders
+        
+        self.optionsList.grid(row = 1, column = 0)
+        self.resultsList.grid(row = 1, column = 1)
+        widgetList = [self.backButton, self.optionsList, self.resultsList]
     
     #Changes screen to display water schedule screen
     def waterScheduleScreen(self):
@@ -87,7 +100,9 @@ class MainGUI(Frame):
         self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
         self.backButton.grid()
         self.backButton.image = img1
-        widgetList = [self.backButton]
+        self.watered = Label(text = "\n\n\nYour last watering was...\nYour next scheduled watering is...\n\n\n", font = FONTSIZE)      #Can be connected to last recorded data?
+        self.watered.grid()
+        widgetList = [self.backButton, self.watered]
     
     #Changes screen to display settings menu
     def settingsScreen(self):
@@ -98,7 +113,7 @@ class MainGUI(Frame):
         self.backButton.grid()
         self.backButton.image = img1
         settingsDisclaimer = "\n\n\nDue to time constraints, customization for\nthe plant's voice, GUI theme, and other settings were cut.\nSorry about that!\n\n\n"
-        self.settingsText = Label(text = settingsDisclaimer)
+        self.settingsText = Label(text = settingsDisclaimer, font = FONTSIZE)
         self.settingsText.grid()
         widgetList = [self.backButton, self.settingsText]
 
