@@ -1,6 +1,6 @@
 from tkinter import *
 from matplotlib import *
-from Draw_Graph import *
+from Draw_Graph import *         #temporarily commented out to work on chart
 
 #constants
 WIDTH = 800
@@ -97,7 +97,10 @@ class MainGUI(Frame):
         self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
         self.backButton.grid()
         self.backButton.image = img1
-        widgetList = [self.backButton]
+        settingsDisclaimer = "\n\n\nDue to time constraints, customization for\nthe plant's voice, GUI theme, and other settings were cut.\nSorry about that!\n\n\n"
+        self.settingsText = Label(text = settingsDisclaimer)
+        self.settingsText.grid()
+        widgetList = [self.backButton, self.settingsText]
 
 #################################  MAIN  ########################################
 #create window
