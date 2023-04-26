@@ -30,6 +30,11 @@ while(True):
     # add data to lists   
     moistures.append(touch)
     times.append(currentTime)
+    
+    if (touch <= 500):
+        #call function to play sound of needing water
+   
+    
    
     print(f"Temp: {temp} \t Moisture: {touch}")
     print(f"Moisture list: {moistures}")
