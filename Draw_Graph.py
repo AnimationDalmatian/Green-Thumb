@@ -10,7 +10,8 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 
 #set data
-data = {x for x in mS.Moistures: y for y in mS.times}
+#data = dict[x for x in mS.moistures: x for x in mS.times]
+data = {k:v for (k,v) in zip(mS.moistures, mS.times)}
 options = data.keys()
 results = data.values()
 

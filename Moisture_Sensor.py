@@ -36,9 +36,9 @@ while(True):
        pass
     
    
-    print(f"Temp: {temp} \t Moisture: {touch}")
-    print(f"Moisture list: {moistures}")
-    print(f"Time list: {times}")
+    #print(f"Temp: {temp} \t Moisture: {touch}")
+    #print(f"Moisture list: {moistures}")
+    #print(f"Time list: {times}")
     time.sleep(3)
     
   
