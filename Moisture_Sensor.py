@@ -33,7 +33,7 @@ while(True):
     
     if (touch <= 500):
         #call function to play sound of needing water
-   
+       pass
     
    
     print(f"Temp: {temp} \t Moisture: {touch}")

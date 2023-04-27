@@ -5,7 +5,7 @@ from Draw_Graph import *
 #constants
 WIDTH = 800
 HEIGHT = 800
-FONTSIZE = 40
+FONTSIZE = 30
 
 #initialize widget list which will later be filled with widgets that are
 #on screen, in order for them to be destroyed when a button is pressed
@@ -85,11 +85,11 @@ class MainGUI(Frame):
             optionsText += (str(i) + "\n")
             resultsText += (str(data[i]) + "\n")
         
-        self.optionsList = Label(text = optionsText, font = FONTSIZE)    #add borders
-        self.resultsList = Label(text = resultsText, font = FONTSIZE)    #add borders
+        self.optionsList = Label(text = optionsText, font = ("", FONTSIZE), borderwidth = 2, relief = "ridge", justify = LEFT, width = 9)    #add borders
+        self.resultsList = Label(text = resultsText, font = ("", FONTSIZE), borderwidth = 2, relief = "ridge", justify = RIGHT)    #add borders
         
-        self.optionsList.grid(row = 1, column = 0)
-        self.resultsList.grid(row = 1, column = 1)
+        self.optionsList.grid(row = 1, sticky = W)
+        self.resultsList.grid(row = 1, sticky = E)
         widgetList = [self.backButton, self.optionsList, self.resultsList]
     
     #Changes screen to display water schedule screen
@@ -100,7 +100,7 @@ class MainGUI(Frame):
         self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
         self.backButton.grid()
         self.backButton.image = img1
-        self.watered = Label(text = "\n\n\nYour last watering was...\nYour next scheduled watering is...\n\n\n", font = FONTSIZE)      #Can be connected to last recorded data?
+        self.watered = Label(text = "\n\n\nYour last watering was...\nYour next scheduled watering is...\n\n\n", font = ("", FONTSIZE))      #Can be connected to last recorded data?
         self.watered.grid()
         widgetList = [self.backButton, self.watered]
     
@@ -113,7 +113,7 @@ class MainGUI(Frame):
         self.backButton.grid()
         self.backButton.image = img1
         settingsDisclaimer = "\n\n\nDue to time constraints, customization for\nthe plant's voice, GUI theme, and other settings were cut.\nSorry about that!\n\n\n"
-        self.settingsText = Label(text = settingsDisclaimer, font = FONTSIZE)
+        self.settingsText = Label(text = settingsDisclaimer, font = ("", FONTSIZE))
         self.settingsText.grid()
         widgetList = [self.backButton, self.settingsText]
 

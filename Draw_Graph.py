@@ -9,16 +9,16 @@ use('TkAgg')
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
 
+#set data
+data = {x for x in mS.Moistures: y for y in mS.times}
+options = data.keys()
+results = data.values()
+
 class App(Tk):
     def __init__(self):
         super().__init__()
         self.title('Tkinter Matplotlib Demo')
         
-        #set data
-        data = {x for x in mS.Moistures: y for y in mS.times}
-        options = data.keys()
-        results = data.values()
-
         #600x400 pixels
         figure = Figure(figsize=(6,4), dpi=100)
         figure_canvas = FigureCanvasTkAgg(figure, self)
