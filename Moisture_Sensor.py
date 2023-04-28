@@ -4,7 +4,13 @@ import time
 import board
 from adafruit_seesaw.seesaw import Seesaw
 import RPi.GPIO as GPIO
-#import SpeakerCode as speaker
+import pygame
+
+# intialize speaker sound
+file = 'Thirsty2.mp3'
+pygame.init()
+pygame.mixer.init()
+pygame.mixer.music.load(file)
 
 # set the RPi to the Broadcom pin layout
 GPIO.setmode(GPIO.BCM)
@@ -31,11 +37,16 @@ def readSensor():
     moistures.append(touch)
     times.append(currentTime)
     
-    if (touch <= 500):
-        #call function to play sound of needing water
-       #speaker.LowWater()
-       pass
-    
+    # play sound
+    total = 0
+    for num in moistures:
+        total += num
+    total /= len(moistures)
+    if (total <= 600):
+        pygame.mixer.music.play()
+
+        #while pygame.mixer.music.get_busy(): 
+         #   pygame.time.Clock().tick(10)
    
     #print(f"Temp: {temp} \t Moisture: {touch}")
     print(f"Moisture list: {moistures}")

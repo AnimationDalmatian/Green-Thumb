@@ -125,19 +125,18 @@ class MainGUI(Frame):
         
         #determine whether or not the plant has enough water
         statusText = 0
-        count = 0
         for num in mS.moistures:
             statusText += num
-        statusText /= count
+        statusText /= len(mS.moistures)
         if(statusText < 600):
             statusText = "The plant needs water!"
         else:
             statusText = "The plant has enough water!"
         
         self.status = Label(text = statusText, font = ("", FONTSIZE), borderwidth = 2, relief = "ridge")
-        self.status.grid(row = 0, columnspan = 2)
+        self.status.grid(row = 1, columnspan = 2)
         
-        widgetList = [self.status]    
+        widgetList = [self.status, self.app]    
         
         
     def updateChart(self):
@@ -155,10 +154,9 @@ class MainGUI(Frame):
         
         #determine whether or not the plant has enough water
         statusText = 0
-        count = 0
         for num in mS.moistures:
             statusText += num
-        statusText /= count
+        statusText /= len(mS.moistures)
         if(statusText < 600):
             statusText = "The plant needs water!"
         else:
