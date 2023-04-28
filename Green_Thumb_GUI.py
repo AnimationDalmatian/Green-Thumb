@@ -1,6 +1,7 @@
 from tkinter import *
 from matplotlib import *
 from Draw_Graph import *
+import Moisture_Sensor as mS
 
 #constants
 WIDTH = 800
@@ -25,7 +26,7 @@ class MainGUI(Frame):
             try:
                 widget.destroy()
             except:
-                pass
+                self.app.destroy()
     
     #configure GUI
     def setupGUI(self):
@@ -63,11 +64,13 @@ class MainGUI(Frame):
         self.clearWindow()
         img1 = PhotoImage(file="Graphics/BackButton.gif")
         self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
-        self.backButton.grid()
+        self.updateButton = Button(self.parent, text = "UPDATE", anchor = N+W, command = self.updateGraph)
+        self.backButton.grid(row = 0, column = 0)
+        self.updateButton.grid(row = 0, column = 1)
         self.backButton.image = img1
         #Create chart from Draw_Graph.py
         self.app = App()
-        widgetList = [self.backButton, self.app]
+        widgetList = [self.backButton, self.app, self.updateButton]
     
     #Changes screen to display real-time sensor feedback screen
     def sensorFeedbackScreen(self):
@@ -75,23 +78,18 @@ class MainGUI(Frame):
         self.clearWindow()
         img1 = PhotoImage(file="Graphics/BackButton.gif")
         self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
-        self.backButton.grid()
+        self.updateButton = Button(self.parent, text = "UPDATE", anchor = N+W, command = self.updateChart)
         self.backButton.image = img1
+        self.backButton.grid(row = 0, column = 0)
+        self.updateButton.grid(row = 0, column = 1)
         
-        #Set up table                                   #use same data from graph for table
-        optionsText = ""
-        resultsText = ""
-        for i in data:
-            optionsText += (str(i) + "\n")
-            resultsText += (str(data[i]) + "\n")
+        self.timeList = Label(text = "", font = ("", FONTSIZE), borderwidth = 2, relief = "ridge", justify = LEFT)
+        self.moistureList = Label(text = "", font = ("", FONTSIZE), borderwidth = 2, relief = "ridge", justify = RIGHT)
+        self.timeList.grid(row = 1, sticky = W)
+        self.moistureList.grid(row = 1, sticky = E)
+        #Set up table                                   #use same data from graph for table 
+        self.updateChart()
         
-        self.optionsList = Label(text = optionsText, font = ("", FONTSIZE), borderwidth = 2, relief = "ridge", justify = LEFT, width = 9)    #add borders
-        self.resultsList = Label(text = resultsText, font = ("", FONTSIZE), borderwidth = 2, relief = "ridge", justify = RIGHT)    #add borders
-        
-        self.optionsList.grid(row = 1, sticky = W)
-        self.resultsList.grid(row = 1, sticky = E)
-        widgetList = [self.backButton, self.optionsList, self.resultsList]
-    
     #Changes screen to display water schedule screen
     def waterScheduleScreen(self):
         global widgetList
@@ -116,6 +114,31 @@ class MainGUI(Frame):
         self.settingsText = Label(text = settingsDisclaimer, font = ("", FONTSIZE))
         self.settingsText.grid()
         widgetList = [self.backButton, self.settingsText]
+
+    def updateGraph(self):
+        mS.readSensor()
+        self.app.destroy()
+        self.app = App()
+        
+    def updateChart(self):
+        global widgetList
+        self.moistureList.destroy()
+        self.timeList.destroy()
+        mS.readSensor()
+        self.moistureText = "Readings:\n"
+        self.timeText = "Time:\n"
+        for i in mS.moistures:
+            self.moistureText += (str(i) + "\n")
+            
+        for i in mS.times:
+            self.timeText += (str(i) + "\n")
+        
+        self.timeList = Label(text = self.timeText, font = ("", FONTSIZE), borderwidth = 2, relief = "ridge", justify = LEFT)
+        self.moistureList = Label(text = self.moistureText, font = ("", FONTSIZE), borderwidth = 2, relief = "ridge", justify = RIGHT)
+        self.timeList.grid(row = 1, sticky = W)
+        self.moistureList.grid(row = 1, sticky = E)
+        
+        widgetList = [self.backButton, self.timeList, self.moistureList, self.updateButton]
 
 #################################  MAIN  ########################################
 #create window

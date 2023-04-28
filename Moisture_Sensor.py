@@ -4,6 +4,7 @@ import time
 import board
 from adafruit_seesaw.seesaw import Seesaw
 import RPi.GPIO as GPIO
+#import SpeakerCode as speaker
 
 # set the RPi to the Broadcom pin layout
 GPIO.setmode(GPIO.BCM)
@@ -16,8 +17,7 @@ ss = Seesaw(i2c_bus, addr = 0x36)
 moistures = []
 times = []
 
-
-while(True):
+def readSensor():
     # read moisture level through capacitive tough pad
     touch = ss.moisture_read()
     # read temperature from the temperature sensor
@@ -33,12 +33,13 @@ while(True):
     
     if (touch <= 500):
         #call function to play sound of needing water
+       #speaker.LowWater()
        pass
     
    
     #print(f"Temp: {temp} \t Moisture: {touch}")
-    #print(f"Moisture list: {moistures}")
-    #print(f"Time list: {times}")
-    time.sleep(3)
+    print(f"Moisture list: {moistures}")
+    print(f"Time list: {times}")
+    time.sleep(.1)
     
   

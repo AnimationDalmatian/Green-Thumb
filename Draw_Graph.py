@@ -11,9 +11,9 @@ from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationTool
 
 #set data
 #data = dict[x for x in mS.moistures: x for x in mS.times]
-data = {k:v for (k,v) in zip(mS.moistures, mS.times)}
-options = data.keys()
-results = data.values()
+#data = {k:v for (k,v) in zip(mS.moistures, mS.times)}
+#options = data.keys()
+#results = data.values()
 
 class App(Tk):
     def __init__(self):
@@ -21,13 +21,19 @@ class App(Tk):
         self.title('Tkinter Matplotlib Demo')
         
         #600x400 pixels
-        figure = Figure(figsize=(6,4), dpi=100)
-        figure_canvas = FigureCanvasTkAgg(figure, self)
-        NavigationToolbar2Tk(figure_canvas, self)
+        self.figure = Figure(figsize=(6,4), dpi=100)
+        self.figure_canvas = FigureCanvasTkAgg(self.figure, self)
+        NavigationToolbar2Tk(self.figure_canvas, self)
 
         #Establish axes for graph
-        axes = figure.add_subplot()
+        data = {k:v for (k,v) in zip(mS.times, mS.moistures)}
+        options = data.keys()
+        results = data.values()
+        
+        axes = self.figure.add_subplot()
         axes.plot(options, results)
-        axes.set_title("Test")
-        axes.set_ylabel("Options")
-        figure_canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
+        axes.set_title("Water Over Time")
+        axes.set_ylabel("Water Level")
+        axes.set_xlabel("Time")
+        self.figure_canvas.get_tk_widget().pack(side=TOP, fill=BOTH, expand=1)
+        
