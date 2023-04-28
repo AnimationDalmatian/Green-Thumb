@@ -65,12 +65,14 @@ class MainGUI(Frame):
         img1 = PhotoImage(file="Graphics/BackButton.gif")
         self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
         self.updateButton = Button(self.parent, text = "UPDATE", anchor = N+W, command = self.updateGraph)
+        self.status = Label(text = "", font = ("", FONTSIZE), borderwidth = 2, relief = "ridge")
         self.backButton.grid(row = 0, column = 0)
         self.updateButton.grid(row = 0, column = 1)
+        self.status.grid(row = 1, columnspan = 2)
         self.backButton.image = img1
         #Create chart from Draw_Graph.py
         self.app = App()
-        widgetList = [self.backButton, self.app, self.updateButton]
+        widgetList = [self.backButton, self.app, self.updateButton, self.status]
     
     #Changes screen to display real-time sensor feedback screen
     def sensorFeedbackScreen(self):
@@ -116,9 +118,27 @@ class MainGUI(Frame):
         widgetList = [self.backButton, self.settingsText]
 
     def updateGraph(self):
+        global widgetList
         mS.readSensor()
         self.app.destroy()
         self.app = App()
+        
+        #determine whether or not the plant has enough water
+        statusText = 0
+        count = 0
+        for num in mS.moistures:
+            statusText += num
+        statusText /= count
+        if(statusText < 600):
+            statusText = "The plant needs water!"
+        else:
+            statusText = "The plant has enough water!"
+        
+        self.status = Label(text = statusText, font = ("", FONTSIZE), borderwidth = 2, relief = "ridge")
+        self.status.grid(row = 0, columnspan = 2)
+        
+        widgetList = [self.status]    
+        
         
     def updateChart(self):
         global widgetList
@@ -133,12 +153,25 @@ class MainGUI(Frame):
         for i in mS.times:
             self.timeText += (str(i) + "\n")
         
+        #determine whether or not the plant has enough water
+        statusText = 0
+        count = 0
+        for num in mS.moistures:
+            statusText += num
+        statusText /= count
+        if(statusText < 600):
+            statusText = "The plant needs water!"
+        else:
+            statusText = "The plant has enough water!"
+        
         self.timeList = Label(text = self.timeText, font = ("", FONTSIZE), borderwidth = 2, relief = "ridge", justify = LEFT)
         self.moistureList = Label(text = self.moistureText, font = ("", FONTSIZE), borderwidth = 2, relief = "ridge", justify = RIGHT)
-        self.timeList.grid(row = 1, sticky = W)
-        self.moistureList.grid(row = 1, sticky = E)
+        self.status = Label(text = statusText, font = ("", FONTSIZE), borderwidth = 2, relief = "ridge")
+        self.timeList.grid(row = 1, column = 0, columnspan = 2)
+        self.moistureList.grid(row = 1, column = 2, columnspan = 2)
+        self.status.grid(row = 2, columnspan = 4)
         
-        widgetList = [self.backButton, self.timeList, self.moistureList, self.updateButton]
+        widgetList = [self.backButton, self.timeList, self.moistureList, self.updateButton, self.status]
 
 #################################  MAIN  ########################################
 #create window
