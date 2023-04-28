@@ -63,13 +63,15 @@ class MainGUI(Frame):
         global widgetList, graph
         self.clearWindow()
         img1 = PhotoImage(file="Graphics/BackButton.gif")
+        img2 = PhotoImage(file="Graphics/UpdateButton.gif")
         self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
-        self.updateButton = Button(self.parent, text = "UPDATE", anchor = N+W, command = self.updateGraph)
+        self.updateButton = Button(self.parent, image = img2, anchor = N+W, command = self.updateGraph)
         self.status = Label(text = "", font = ("", FONTSIZE), borderwidth = 2, relief = "ridge")
         self.backButton.grid(row = 0, column = 0)
         self.updateButton.grid(row = 0, column = 1)
         self.status.grid(row = 1, columnspan = 2)
         self.backButton.image = img1
+        self.updateButton.image = img2
         #Create chart from Draw_Graph.py
         self.app = App()
         widgetList = [self.backButton, self.app, self.updateButton, self.status]
@@ -79,9 +81,11 @@ class MainGUI(Frame):
         global widgetList
         self.clearWindow()
         img1 = PhotoImage(file="Graphics/BackButton.gif")
+        img2 = PhotoImage(file="Graphics/UpdateButton.gif")
         self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
-        self.updateButton = Button(self.parent, text = "UPDATE", anchor = N+W, command = self.updateChart)
+        self.updateButton = Button(self.parent, image = img2, anchor = N+W, command = self.updateChart)
         self.backButton.image = img1
+        self.updateButton.image = img2
         self.backButton.grid(row = 0, column = 0)
         self.updateButton.grid(row = 0, column = 1)
         
@@ -91,6 +95,7 @@ class MainGUI(Frame):
         self.moistureList.grid(row = 1, sticky = E)
         #Set up table                                   #use same data from graph for table 
         self.updateChart()
+        widgetList = [self.backButton, self.updateButton, self.timeList, self.moistureList]
         
     #Changes screen to display water schedule screen
     def waterScheduleScreen(self):
@@ -98,11 +103,15 @@ class MainGUI(Frame):
         self.clearWindow()
         img1 = PhotoImage(file="Graphics/BackButton.gif")
         self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
-        self.backButton.grid()
+        self.watered = Label(text = "\n\n\nEnter your next planned watering...:\n\n\n", font = ("", FONTSIZE))
+        self.textBox = Text(self.parent, height = 3)
+        
+        self.backButton.grid(row = 0)
+        self.watered.grid(row = 1)
+        self.textBox.grid(row = 2)
         self.backButton.image = img1
-        self.watered = Label(text = "\n\n\nYour last watering was...\nYour next scheduled watering is...\n\n\n", font = ("", FONTSIZE))      #Can be connected to last recorded data?
-        self.watered.grid()
-        widgetList = [self.backButton, self.watered]
+        
+        widgetList = [self.backButton, self.watered, self.textBox]
     
     #Changes screen to display settings menu
     def settingsScreen(self):
@@ -121,6 +130,7 @@ class MainGUI(Frame):
         global widgetList
         mS.readSensor()
         self.app.destroy()
+        self.status.destroy()
         self.app = App()
         
         #determine whether or not the plant has enough water
@@ -128,7 +138,7 @@ class MainGUI(Frame):
         for num in mS.moistures:
             statusText += num
         statusText /= len(mS.moistures)
-        if(statusText < 600):
+        if(statusText < 800):
             statusText = "The plant needs water!"
         else:
             statusText = "The plant has enough water!"
@@ -136,13 +146,14 @@ class MainGUI(Frame):
         self.status = Label(text = statusText, font = ("", FONTSIZE), borderwidth = 2, relief = "ridge")
         self.status.grid(row = 1, columnspan = 2)
         
-        widgetList = [self.status, self.app]    
+        widgetList = [self.backButton, self.updateButton, self.app, self.status]
         
         
     def updateChart(self):
         global widgetList
         self.moistureList.destroy()
         self.timeList.destroy()
+        self.status.destroy()
         mS.readSensor()
         self.moistureText = "Readings:\n"
         self.timeText = "Time:\n"
@@ -157,7 +168,7 @@ class MainGUI(Frame):
         for num in mS.moistures:
             statusText += num
         statusText /= len(mS.moistures)
-        if(statusText < 600):
+        if(statusText < 800):
             statusText = "The plant needs water!"
         else:
             statusText = "The plant has enough water!"
@@ -169,7 +180,7 @@ class MainGUI(Frame):
         self.moistureList.grid(row = 1, column = 2, columnspan = 2)
         self.status.grid(row = 2, columnspan = 4)
         
-        widgetList = [self.backButton, self.timeList, self.moistureList, self.updateButton, self.status]
+        widgetList = [self.backButton, self.updateButton, self.timeList, self.moistureList, self.status]
 
 #################################  MAIN  ########################################
 #create window

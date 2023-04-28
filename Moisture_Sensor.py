@@ -42,7 +42,7 @@ def readSensor():
     for num in moistures:
         total += num
     total /= len(moistures)
-    if (total <= 600):
+    if (total <= 800):
         pygame.mixer.music.play()
 
         #while pygame.mixer.music.get_busy(): 
