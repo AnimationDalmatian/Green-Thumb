@@ -2,5 +2,3 @@ download adafruit library - sudo pip3 install adafruit-circuitpython-seesaw
 enable i2c on rasp pi config
 download metaplot - pip install matplotlib
 https://learn.adafruit.com/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor/python-circuitpython-test
-download pyttsx3 - pip install pyttsx3
-https://pypi.org/project/pyttsx3/
