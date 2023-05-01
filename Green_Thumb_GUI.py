@@ -84,10 +84,12 @@ class MainGUI(Frame):
         img2 = PhotoImage(file="Graphics/UpdateButton.gif")
         self.backButton = Button(self.parent, image = img1, anchor = N+E, command = self.homeScreen)
         self.updateButton = Button(self.parent, image = img2, anchor = N+W, command = self.updateChart)
+        self.status = Label(text = "", font = ("", FONTSIZE), borderwidth = 2, relief = "ridge")
         self.backButton.image = img1
         self.updateButton.image = img2
         self.backButton.grid(row = 0, column = 0)
         self.updateButton.grid(row = 0, column = 1)
+        self.status.grid(row = 1, columnspan = 2)
         
         self.timeList = Label(text = "", font = ("", FONTSIZE), borderwidth = 2, relief = "ridge", justify = LEFT)
         self.moistureList = Label(text = "", font = ("", FONTSIZE), borderwidth = 2, relief = "ridge", justify = RIGHT)
