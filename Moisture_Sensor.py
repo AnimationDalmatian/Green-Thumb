@@ -1,5 +1,3 @@
-# new rough skeleton of moisture sensor code with new sensor
-
 import time
 import board
 from adafruit_seesaw.seesaw import Seesaw
@@ -44,9 +42,6 @@ def readSensor():
     total /= len(moistures)
     if (total <= 800):
         pygame.mixer.music.play()
-
-        #while pygame.mixer.music.get_busy(): 
-         #   pygame.time.Clock().tick(10)
    
     #print(f"Temp: {temp} \t Moisture: {touch}")
     print(f"Moisture list: {moistures}")

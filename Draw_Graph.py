@@ -1,6 +1,5 @@
 #Subfile which will draw graph for top right button's screen. 
 #This will be imported to the main file and used in a widget.
-#To use matplotlib - pip install matplotlib
 from matplotlib import *
 from tkinter import *
 import Moisture_Sensor as mS
@@ -8,12 +7,6 @@ import Moisture_Sensor as mS
 use('TkAgg')
 from matplotlib.figure import Figure
 from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
-
-#set data
-#data = dict[x for x in mS.moistures: x for x in mS.times]
-#data = {k:v for (k,v) in zip(mS.moistures, mS.times)}
-#options = data.keys()
-#results = data.values()
 
 class App(Tk):
     def __init__(self):
